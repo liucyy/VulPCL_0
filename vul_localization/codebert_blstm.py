@@ -33,7 +33,7 @@ def atten_score_process(func_to_cwe, batch_id, atten_score, predict, true, vul_i
     for item in code_data:
         id_to_code[int(item[0].split('@')[-1])] = item[1]
 
-    top_10 = ['CWE-119', 'CWE-20', 'CWE-125', 'CWE-399', 'CWE-264', 'CWE-200', 'CWE-190', 'CWE-476', 'CWE-787', 'CWE-416'] #'CWE-189'
+    top_10 = ['CWE-119', 'CWE-20', 'CWE-125', 'CWE-399', 'CWE-264', 'CWE-200', 'CWE-190', 'CWE-476', 'CWE-787', 'CWE-416']
     for pos in range(len(batch_id)):
         atten_scores = np.zeros(512)
         id = batch_id[pos]
@@ -115,7 +115,7 @@ def evaluate_atten_score(config, model, test_iter):
             predict = torch.max(outs.data, 1)[1].cpu().numpy()
             true =label.data.cpu().numpy()
             id = id.data.cpu().numpy()
-            p_t, p_f, tp_t, tp_f = atten_score_process(func_to_cwe, id, atten_score, predict, true, vul_idx, 'test', p_line_num=17)#20,24,26,28,30,34,  38,40
+            p_t, p_f, tp_t, tp_f = atten_score_process(func_to_cwe, id, atten_score, predict, true, vul_idx, 'test', p_line_num=17)
             true_p += p_t
             false_p += p_f
             true_tp += tp_t
